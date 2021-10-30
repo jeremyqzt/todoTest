@@ -1,2 +1,2 @@
-export { APIClient, APIClientModule } from "./client";
-export { TodoManager, TodoManagerModule } from "./todoManager";
+export { APIClient } from "./client";
+export { TodoManager } from "./todoManager";

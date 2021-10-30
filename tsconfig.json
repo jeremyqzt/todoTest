@@ -13,5 +13,11 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "experimentalDecorators": true
-  }
+  },
+  "include": [
+    "./src/**/*"
+  ],
+  "exclude": [
+    "**/*.spec.ts"
+  ]
 }

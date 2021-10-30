@@ -48,5 +48,14 @@ describe("APIClient", () => {
         done();
       });
     });
+
+    test("Handles rejections gracefully", (done) => {
+      mockFetch.mockRejectedValueOnce(new Error("Opps"));
+      apiClient.getTodos().then((data) => {
+        expect(mockFetch.mock.calls.length).toBe(1);
+        expect(data).toEqual([]);
+        done();
+      });
+    });
   });
 });

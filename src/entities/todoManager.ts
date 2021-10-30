@@ -1,4 +1,4 @@
-import { injectable, ContainerModule, inject, interfaces } from "inversify";
+import { injectable, inject } from "inversify";
 import { Client, TodoItem, Manager } from "../interfaces/interface";
 import { TYPES } from "../constants/types";
 
@@ -15,8 +15,4 @@ class TodoManager implements Manager {
   }
 }
 
-const TodoManagerModule = new ContainerModule((bind: interfaces.Bind) => {
-  bind<Manager>(TYPES.ApiManager).to(TodoManager);
-});
-
-export { TodoManager, TodoManagerModule };
+export { TodoManager };

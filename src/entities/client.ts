@@ -2,21 +2,21 @@ import "reflect-metadata";
 
 import fetch from "cross-fetch";
 
-import { injectable, ContainerModule, interfaces } from "inversify";
+import { injectable } from "inversify";
 import { Client, TodoItem } from "../interfaces/interface";
-import { TYPES } from "../constants/types";
 
 @injectable()
 class APIClient implements Client {
+  remoteUrl = "https://jsonplaceholder.typicode.com/todos";
+
   public getTodos(): Promise<TodoItem[]> {
-    return fetch("https://jsonplaceholder.typicode.com/todos").then((resp) =>
-      resp.json()
-    ) as any as Promise<TodoItem[]>;
+    return (
+      fetch(this.remoteUrl)
+        .then((resp) => resp.json())
+        // catch case, should agree on something nicer than []
+        .catch(() => []) as any as Promise<TodoItem[]>
+    );
   }
 }
 
-const APIClientModule = new ContainerModule((bind: interfaces.Bind) => {
-  bind<Client>(TYPES.TodoClient).to(APIClient);
-});
-
-export { APIClient, APIClientModule };
+export { APIClient };
